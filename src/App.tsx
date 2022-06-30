@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './components/Home'; 
 import Nav from "./components/Nav";
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   return (

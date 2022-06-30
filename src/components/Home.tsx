@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Drills from './Drills'
+import { Button, Form, FloatingLabel } from 'react-bootstrap';
 
 export default function Home() {
   const [skills, setSkills] = useState(Array)
   const [drills, setDrills] = useState(Array)
-
-  useEffect(() => {
-    console.log(drills)
-  }, [drills])
+  const [duration, setDuration] = useState(15)
 
   const handleToggle = (event:any) => {
     const skill = event.target.name
@@ -21,33 +19,50 @@ export default function Home() {
 
   const handleSubmit = (event:any) => {
     event.preventDefault()
-    skills.forEach(skill => {
-      fetch(`/api/drills/${skill}`)
+    fetch(`/api/drills/${skills.join('-')}-${duration}`)
       .then(res =>res.json())
       .then(drillResults => setDrills(prevDrills => prevDrills.concat(drillResults)))
-    })
+  }
+
+  const handleSelect = (event:any) => {
+    const selectedDuration = event.target.value
+    setDuration(selectedDuration)
   }
 
   if (drills.length === 0) {
     return (
       <>
         <div className='skills'>
-          <h1>Create A Custom Workout</h1>
-          
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="">Skills: </label>
-            <input type="checkbox" name="shooting" onChange={handleToggle}/> Shooting
-            <input type="checkbox" name="ball handling" onChange={handleToggle}/> Ball Handling
-            <input type="checkbox" name="finishing" onChange={handleToggle}/> Finishing
-            <br />
-            <label htmlFor="">Duration: </label>
-            <select name="" id="">
-              <option value="15">15 Minutes</option>
-              <option value="30">30 Minutes</option>
-              <option value="60">60 Minutes</option>
-            </select>
-            <button>Select Skills</button>
-          </form>
+          <h1>Custom Workout Builder</h1>
+          <p>Select The Skills You Want To Work On</p>
+          <Form onSubmit={handleSubmit}>
+            <Form.Check 
+              type="checkbox"
+              label="Shooting"
+              name="shooting"
+              onChange={handleToggle}
+            />
+            <Form.Check 
+              type="checkbox"
+              label="Finishing"
+              name="finishing"
+              onChange={handleToggle}
+            />
+            <Form.Check 
+              type="checkbox"
+              label="Ball Handling"
+              name="ball handling"
+              onChange={handleToggle}
+            />
+            <FloatingLabel controlId="floatingSelect" label="Workout Duration">
+              <Form.Select aria-label="Floating label select example" onChange={handleSelect} className="duration-select">
+                <option value="15">15 Minutes</option>
+                <option value="30">30 Minutes</option>
+                <option value="60">60 Minutes</option>
+              </Form.Select>
+            </FloatingLabel>
+            <Button type="submit">Create Workout</Button>
+          </Form>
         </div>
       </>
     )
@@ -57,6 +72,7 @@ export default function Home() {
         <div className='skills'>
           <Drills
             drills={drills}
+            duration={duration}
           />
         </div>
       </>
