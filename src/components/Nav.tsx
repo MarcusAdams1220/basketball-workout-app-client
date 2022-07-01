@@ -3,7 +3,7 @@ export default function Nav() {
     <>
       <a href="/builder">Workout Builder</a>
       <a href="/sign-up">Sign Up</a>
-      <a href="/login">Login</a>
+      <a href="/">Login</a>
     </>
   )
 }

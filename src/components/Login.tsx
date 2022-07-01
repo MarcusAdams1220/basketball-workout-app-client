@@ -7,14 +7,6 @@ export default function Login() {
   const [password, setPassword] = useState(String)
   const [loggedInUser, setLoggedInUser] = useState(String)
 
-  useEffect(() =>{
-    if (loggedInUser === '') {
-      console.log('no logged in user')
-    } else {
-      console.log('logged in user')
-    }
-  }, [loggedInUser])
-
   const handleEmailChange = (event:any) => {
     event.preventDefault()
     setEmail(event.target.value)
@@ -24,7 +16,6 @@ export default function Login() {
     setPassword(event.target.value)
   }
   const handleLogin = (event:any) => {
-    // Check if password is long enough & return error message
     event.preventDefault()
     const data = {email, password}
     fetch('/login', {

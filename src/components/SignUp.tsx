@@ -6,11 +6,8 @@ export default function SignUp() {
   const [name, setName] = useState(String)
   const [email, setEmail] = useState(String)
   const [password, setPassword] = useState(String)
+  const [passwordMatch, setPasswordMatch] = useState(String)
   const [signedUp, setSignedUp] = useState(false)
-
-  useEffect(() => {
-    console.log(signedUp)
-  }, [signedUp])
 
   const handleNameChange = (event:any) => {
     event.preventDefault()
@@ -24,16 +21,27 @@ export default function SignUp() {
     event.preventDefault()
     setPassword(event.target.value)
   }
-  const handleSubmit = (event:any) => {
+  const handlePasswordMatchChange = (event:any) => {
     event.preventDefault()
-    const data = {name, email, password}
-    fetch('/signup', {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(res => setSignedUp(true))
+    setPasswordMatch(event.target.value)
+  }
+  const handleSubmit = (event:any) => {
+    if (password == passwordMatch && password.length > 0) {
+      console.log('passwords match')
+      event.preventDefault()
+      const data = {name, email, password}
+      fetch('/signup', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(res => setSignedUp(true))
+    } else {
+      event.preventDefault()
+      const passwordMatch = document.getElementsByClassName('password-error')[0]
+      passwordMatch.innerHTML = 'Passwords do not match'
+    }
   }
 
   if (signedUp) {
@@ -61,6 +69,13 @@ export default function SignUp() {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
           </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPasswordMatch" id="password-match">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control type="password" placeholder="Confirm Password" onChange={handlePasswordMatchChange}/>
+          </Form.Group>
+
+          <p className='password-error'></p>
   
           <Button variant="primary" type="submit" onClick={handleSubmit}>
             Sign Me Up!
