@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Workout from './Workout'
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
 
-export default function Builder() {
+export default function WorkoutBuilder() {
   const [skills, setSkills] = useState(Array)
   const [drills, setDrills] = useState(Array)
   const [duration, setDuration] = useState(15)
@@ -33,7 +33,7 @@ export default function Builder() {
     return (
       <>
         <div className='skills'>
-          <h1>Custom Workout Builder</h1>
+          <h2>Custom Workout Builder</h2>
           <p>Select The Skills You Want To Work On</p>
           <Form onSubmit={handleSubmit}>
             <Form.Check 

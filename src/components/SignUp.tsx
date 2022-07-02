@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import Builder from './Builder'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignUp() {
   const [name, setName] = useState(String)
@@ -8,6 +8,7 @@ export default function SignUp() {
   const [password, setPassword] = useState(String)
   const [passwordMatch, setPasswordMatch] = useState(String)
   const [signedUp, setSignedUp] = useState(false)
+  const navigate = useNavigate()
 
   const handleNameChange = (event:any) => {
     event.preventDefault()
@@ -26,9 +27,9 @@ export default function SignUp() {
     setPasswordMatch(event.target.value)
   }
   const handleSubmit = (event:any) => {
-    if (password == passwordMatch && password.length > 0) {
-      console.log('passwords match')
-      event.preventDefault()
+    event.preventDefault()
+    // Check that input fields are not blank
+    if (password == passwordMatch && name.length > 0 && email.length > 0 && password.length > 0) {
       const data = {name, email, password}
       fetch('/signup', {
         method: "POST",
@@ -36,52 +37,68 @@ export default function SignUp() {
         body: JSON.stringify(data)
       })
       .then(res => res.json())
-      .then(res => setSignedUp(true))
-    } else {
-      event.preventDefault()
-      const passwordMatch = document.getElementsByClassName('password-error')[0]
-      passwordMatch.innerHTML = 'Passwords do not match'
+      .then(res => { 
+        if (res.error) {
+          // User already exists
+          const errorMsg = document.getElementsByClassName('error-msg')[0]
+          errorMsg.innerHTML = res.error
+        } else {
+          // Successful sign-up
+          window.localStorage.setItem('isLoggedIn', 'true')
+          setSignedUp(true)
+          navigate('/')
+        }
+      })
+      // Customised error messages
+    } else if (name.length === 0) {
+      // Missing name
+      const errorMsg = document.getElementsByClassName('error-msg')[0]
+      errorMsg.innerHTML = 'You must enter your name'
+    } else if (email.length === 0) {
+      // Missing email
+      const errorMsg = document.getElementsByClassName('error-msg')[0]
+      errorMsg.innerHTML = 'You must enter your email address'
+    } else if (password.length === 0) {
+      // Missing password
+      const errorMsg = document.getElementsByClassName('error-msg')[0]
+      errorMsg.innerHTML = 'You must enter a password'
+    } else if (password !== passwordMatch) {
+      // Passwords do not match
+      const errorMsg = document.getElementsByClassName('error-msg')[0]
+      errorMsg.innerHTML = 'Passwords do not match'
     }
   }
 
-  if (signedUp) {
-    return (
-      <>
-        <Builder />
-      </>
-    )
-  } else {
-    return (
-      <>
-        <h1>Sign Up</h1>
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" name="name" placeholder="Name" onChange={handleNameChange}/>
-          </Form.Group>
-  
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control type="email" placeholder="Email" onChange={handleEmailChange}/>
-          </Form.Group>
-  
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
-          </Form.Group>
+  return (
+    <>
+      <h1>Sign Up</h1>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" name="name" placeholder="Name" onChange={handleNameChange}/>
+        </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPasswordMatch" id="password-match">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm Password" onChange={handlePasswordMatchChange}/>
-          </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control type="email" placeholder="Email" onChange={handleEmailChange}/>
+        </Form.Group>
 
-          <p className='password-error'></p>
-  
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Sign Me Up!
-          </Button>
-        </Form>
-      </>
-    )
-  }  
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPasswordMatch" id="password-match">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control type="password" placeholder="Confirm Password" onChange={handlePasswordMatchChange}/>
+        </Form.Group>
+
+        <p className='error-msg'></p>
+
+        <Button variant="primary" type="submit">
+          Sign Me Up!
+        </Button>
+      </Form>
+    </>
+  )
 }
