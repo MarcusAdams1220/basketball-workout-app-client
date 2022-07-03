@@ -1,0 +1,112 @@
+.workout-builder {
+  text-align: center;
+  margin-top: 100px;
+  color: white;
+}
+
+.workout-builder h1 {
+  font-weight: 700;
+}
+
+.workout-builder h2 {
+  font-size: 25px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.workout-builder .duration-options {
+  width: 20%;
+  margin: 0 auto;
+  font-size: 20px;
+  background-color: rgb(237, 237, 237);
+}
+
+.workout-builder .skill-checkbox {
+  display: inline-block;
+  justify-content: center;
+  padding: 0px 20px 20px 30px;
+  font-size: 20px;
+}
+
+.workout-builder .skill-checkbox [type="checkbox"] {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.workout-builder option {
+  text-align: center;
+  border-radius: 20px;
+}
+
+.workout-builder button {
+  margin-top: 40px;
+  font-size: 20px;
+  padding: 10px 20px;
+  border: 2px solid white;
+}
+
+.workout-builder .effect-msg {
+  margin-top: 20px;
+}
+
+/* Glow On Button Hover */
+
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: black;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}

@@ -3,23 +3,29 @@ import WorkoutBuilder from './components/WorkoutBuilder';
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Nav from "./components/Nav";
-import './App.css'
+import './styles/App.css'
+import './styles/Nav.css'
+import './styles/Forms.css'
+import './styles/WorkoutBuilder.css'
+import './styles/Workout.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   const loggedIn = window.localStorage.getItem('isLoggedIn')
 
   return (
-    <Router>
-      <Nav 
-        loggedIn={loggedIn}
-      />
-      <div className="App">
-        <Routes>
-          <Route path="/" element={loggedIn?<WorkoutBuilder />:<Login />}></Route>
-          <Route path="/sign-up" element={<SignUp />}></Route>
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <Router>
+        <Nav 
+          loggedIn={loggedIn}
+        />
+        <div className="App">
+          <Routes>
+            <Route path="/" element={loggedIn?<WorkoutBuilder />:<Login />}></Route>
+            <Route path="/sign-up" element={<SignUp />}></Route>
+          </Routes>
+        </div>
+      </Router>
+    </div>
   );
 }

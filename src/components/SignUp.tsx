@@ -53,26 +53,27 @@ export default function SignUp() {
     } else if (name.length === 0) {
       // Missing name
       const errorMsg = document.getElementsByClassName('error-msg')[0]
-      errorMsg.innerHTML = 'You must enter your name'
+      errorMsg.innerHTML = '👤 You must enter your name'
     } else if (email.length === 0) {
       // Missing email
       const errorMsg = document.getElementsByClassName('error-msg')[0]
-      errorMsg.innerHTML = 'You must enter your email address'
+      errorMsg.innerHTML = '📧 You must enter your email address'
     } else if (password.length === 0) {
       // Missing password
       const errorMsg = document.getElementsByClassName('error-msg')[0]
-      errorMsg.innerHTML = 'You must enter a password'
+      errorMsg.innerHTML = '🔑 You must enter a password'
     } else if (password !== passwordMatch) {
       // Passwords do not match
       const errorMsg = document.getElementsByClassName('error-msg')[0]
-      errorMsg.innerHTML = 'Passwords do not match'
+      errorMsg.innerHTML = '🚫 Passwords do not match'
     }
   }
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} id="user-form">
+        <h1>Sign Up</h1>
+        <p className='error-msg'></p>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" name="name" placeholder="Name" onChange={handleNameChange}/>
@@ -93,11 +94,11 @@ export default function SignUp() {
           <Form.Control type="password" placeholder="Confirm Password" onChange={handlePasswordMatchChange}/>
         </Form.Group>
 
-        <p className='error-msg'></p>
-
         <Button variant="primary" type="submit">
           Sign Me Up!
         </Button>
+
+        <p>Already Have An Account? <a href="/">Click Here To Log In</a></p>
       </Form>
     </>
   )

@@ -1,0 +1,18 @@
+#basic-navbar-nav {
+  display: flex;
+  justify-content: right;
+}
+
+#logo {
+  width: 250px;
+}
+
+#nav-link {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#nav-link:hover {
+  color: rgb(150, 150, 150);
+}

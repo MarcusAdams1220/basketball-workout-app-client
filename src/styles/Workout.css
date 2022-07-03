@@ -1,0 +1,28 @@
+.workout {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.workout h1 {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.workout h3 {
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+.workout p {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.drill-video {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}

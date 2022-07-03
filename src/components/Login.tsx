@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import WorkoutBuilder from './WorkoutBuilder'
 
 export default function Login() {
   const [email, setEmail] = useState(String)
   const [password, setPassword] = useState(String)
-  const [loggedInUser, setLoggedInUser] = useState(String)
-  const isLoggedIn = window.localStorage.getItem('isLoggedIn')
+  // const isLoggedIn = window.localStorage.getItem('isLoggedIn')
   const handleEmailChange = (event:any) => {
     event.preventDefault()
     setEmail(event.target.value)
@@ -29,18 +27,17 @@ export default function Login() {
       if (email.length === 0) {
         // Missing email
         const errorMsg = document.getElementsByClassName('error-msg')[0]
-        errorMsg.innerHTML = 'You must enter your email address'
+        errorMsg.innerHTML = '📧 You must enter your email address'
       } else if (password.length === 0) {
         // Missing password
         const errorMsg = document.getElementsByClassName('error-msg')[0]
-        errorMsg.innerHTML = 'You must enter your password'
+        errorMsg.innerHTML = '🔑 You must enter your password'
       } else if (user.error) {
         // Email or password is incorrect
         const errorMsg = document.getElementsByClassName('error-msg')[0]
         errorMsg.innerHTML = user.error
       } else {
         // Succesful login
-        setLoggedInUser(user.name)
         window.localStorage.setItem('isLoggedIn', 'true')
         window.location.reload();
       }
@@ -49,8 +46,9 @@ export default function Login() {
 
   return (
     <>
-      <h1>Log In</h1>
-      <Form>  
+      <Form id="user-form">
+        <h2>Log In</h2>
+        <p className="error-msg"></p>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email Address</Form.Label>
           <Form.Control type="email" placeholder="Email" onChange={handleEmailChange}/>
@@ -61,12 +59,13 @@ export default function Login() {
           <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
         </Form.Group>
 
+        
+
         <Button variant="primary" type="submit" onClick={handleLogin}>
           Log In
         </Button>
+        
         <p>Don't Have An Account? <a href="/sign-up">Click Here To Sign Up</a></p>
-
-        <p className="error-msg"></p>
       </Form>
   </>
   )

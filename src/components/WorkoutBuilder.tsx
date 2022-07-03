@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Workout from './Workout'
-import { Button, Form, FloatingLabel } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 export default function WorkoutBuilder() {
   const [skills, setSkills] = useState(Array)
@@ -32,36 +32,39 @@ export default function WorkoutBuilder() {
   if (drills.length === 0) {
     return (
       <>
-        <div className='skills'>
-          <h2>Custom Workout Builder</h2>
-          <p>Select The Skills You Want To Work On</p>
+        <div className='workout-builder'>
+          <h1>Workout Builder</h1>
+          <h2>Which Skills Do You Want To Work On?</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Check 
               type="checkbox"
               label="Shooting"
               name="shooting"
               onChange={handleToggle}
+              className="skill-checkbox"
             />
             <Form.Check 
               type="checkbox"
               label="Finishing"
               name="finishing"
               onChange={handleToggle}
+              className="skill-checkbox"
             />
             <Form.Check 
               type="checkbox"
               label="Ball Handling"
               name="ball handling"
               onChange={handleToggle}
+              className="skill-checkbox"
             />
-            <FloatingLabel controlId="floatingSelect" label="Workout Duration">
-              <Form.Select aria-label="Floating label select example" onChange={handleSelect} className="duration-select">
+            <h2>How Much Time Do You Have?</h2>
+              <Form.Select aria-label="Floating label select example" onChange={handleSelect} className="duration-options" >
                 <option value="15">15 Minutes</option>
                 <option value="30">30 Minutes</option>
                 <option value="60">60 Minutes</option>
               </Form.Select>
-            </FloatingLabel>
-            <Button type="submit">Create Workout</Button>
+            <button type="submit" className='glow-on-hover'>Create Workout</button>
+            <p className='effect-msg'>(Click & Hold For Effect)</p>
           </Form>
         </div>
       </>
