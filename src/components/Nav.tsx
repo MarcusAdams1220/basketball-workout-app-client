@@ -17,7 +17,7 @@ export default function Navigation() {
   if (loggedIn) {
     return (
       <>
-        <Navbar bg="transparent" variant="dark" expand="lg" id="navbar" sticky='top'>
+        <Navbar bg="dark" variant="dark" expand="lg" id="navbar" sticky='top'>
           <Container>
             <Navbar.Brand href="/">
               <img src="https://i.ibb.co/ftnMXcC/workout-app.png" alt="logo" id="logo"/>
@@ -37,7 +37,7 @@ export default function Navigation() {
   } else {
     return (
       <>
-        <Navbar bg="transparent" variant="dark" expand="lg" id="navbar" sticky='top'>
+        <Navbar bg="dark" variant="dark" expand="lg" id="navbar" sticky='top'>
           <Container>
             <Navbar.Brand href="/">
               <img src="https://i.ibb.co/ftnMXcC/workout-app.png" alt="logo" id="logo"/>

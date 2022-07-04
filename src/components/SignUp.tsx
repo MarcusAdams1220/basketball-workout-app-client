@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import WorkoutBuilder from './WorkoutBuilder'
 
 export default function SignUp() {
   const [name, setName] = useState(String)
@@ -69,7 +70,7 @@ export default function SignUp() {
     }
   }
 
-  return (
+return (
     <>
       <Form onSubmit={handleSubmit} id="user-form">
         <h1>Sign Up</h1>
@@ -101,5 +102,5 @@ export default function SignUp() {
         <p>Already Have An Account? <a href="/">Click Here To Log In</a></p>
       </Form>
     </>
-  )
+  )  
 }

@@ -1,5 +1,6 @@
 import ReactPlayer from 'react-player';
 import { useNavigate } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 interface BuilderProps {
   drills: Array<any>;
@@ -32,7 +33,7 @@ export default function Workout( { drills, duration }:BuilderProps ) {
             <hr />
           </div>
           )}
-          <button onClick={saveWorkout}>Mark As Complete</button>
+          <Button onClick={saveWorkout}>Mark As Complete</Button>
       </div>
     </>
   )
