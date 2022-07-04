@@ -1,4 +1,5 @@
 import ReactPlayer from 'react-player';
+import { useNavigate } from 'react-router-dom'
 
 interface BuilderProps {
   drills: Array<any>;
@@ -6,6 +7,18 @@ interface BuilderProps {
 }
 
 export default function Workout( { drills, duration }:BuilderProps ) {
+  const navigate = useNavigate()
+
+  const saveWorkout = (event:any) => {
+    event.preventDefault()
+    fetch(`/workout/${duration}`, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(drills)
+    })
+    navigate('/profile')
+  }
+
   return (
     <>
       <div className='workout'>
@@ -19,6 +32,7 @@ export default function Workout( { drills, duration }:BuilderProps ) {
             <hr />
           </div>
           )}
+          <button onClick={saveWorkout}>Mark As Complete</button>
       </div>
     </>
   )

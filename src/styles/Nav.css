@@ -1,3 +1,7 @@
+#navbar {
+  margin-top: 20px;
+}
+
 #basic-navbar-nav {
   display: flex;
   justify-content: right;
