@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import WorkoutBuilder from './WorkoutBuilder'
 import { useNavigate } from 'react-router-dom'
 
 interface LoginProp {
@@ -11,7 +10,6 @@ interface LoginProp {
 export default function Login({setLoggedIn, loggedIn}:LoginProp) {
   const [email, setEmail] = useState(String)
   const [password, setPassword] = useState(String)
-  // const loggedIn = window.localStorage.getItem('isLoggedIn')
   const navigate = useNavigate()
 
   const handleEmailChange = (event:any) => {
@@ -51,41 +49,33 @@ export default function Login({setLoggedIn, loggedIn}:LoginProp) {
         window.localStorage.setItem('isLoggedIn', 'true')
         window.localStorage.setItem('userId', user.id)
         window.localStorage.setItem('userName', user.name)
-        window.localStorage.setItem('userEmail', user.email)
         navigate('/builder')
       }
     })
   }
 
-  if (loggedIn) {
-    return (
-      <WorkoutBuilder setLoggedIn={setLoggedIn}/>
-    )
-  } else {
-    return (
-      <>
-        <Form id="user-form">
-          <h1>Log In</h1>
-          <p className="error-msg"></p>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control type="email" placeholder="Email" onChange={handleEmailChange}/>
-          </Form.Group>
-  
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
-          </Form.Group>
-  
-          <Button variant="primary" type="submit" onClick={handleLogin}>
-            Log In
-          </Button>
-          
-          <p>Don't Have An Account? <a href="/sign-up">Click Here To Sign Up</a></p>
-        </Form>
-    </>
-    )
-  }
 
-  
+  return (
+    <>
+      <Form id="user-form">
+        <h1>Log In</h1>
+        <p className="error-msg"></p>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control type="email" placeholder="Email" onChange={handleEmailChange}/>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
+        </Form.Group>
+
+        <Button variant="primary" type="submit" onClick={handleLogin}>
+          Log In
+        </Button>
+        
+        <p>Don't Have An Account? <a href="/sign-up">Click Here To Sign Up</a></p>
+      </Form>
+  </>
+  )
 }

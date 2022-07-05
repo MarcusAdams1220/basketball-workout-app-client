@@ -4,10 +4,11 @@ import { Form } from 'react-bootstrap';
 
 interface BuilderProp {
   setLoggedIn: (state:boolean) => void;
+  loggedIn: any
 }
 
-export default function WorkoutBuilder({setLoggedIn}:BuilderProp) {
-  setLoggedIn(true)
+export default function WorkoutBuilder({setLoggedIn, loggedIn}:BuilderProp) {
+  // setLoggedIn(true)
   const [skills, setSkills] = useState(Array)
   const [drills, setDrills] = useState(Array)
   const [duration, setDuration] = useState(15)

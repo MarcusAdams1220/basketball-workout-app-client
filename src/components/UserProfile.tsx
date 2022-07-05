@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 
 interface ProfileProp {
-  setLoggedIn: (state:boolean) => void
+  setLoggedIn: (state:boolean) => void;
+  loggedIn: any
 }
 
 
-export default function UserProfile({setLoggedIn}:ProfileProp) {
-  setLoggedIn(true)
+export default function UserProfile({setLoggedIn, loggedIn}:ProfileProp) {
+  // setLoggedIn(true)
   const [numOfWorkouts, setNumOfWorkouts] = useState(Number)
   const [durationOfAllWorkouts, setDurationOfAllWorkouts] = useState(Number)
   const userId = window.localStorage.getItem('userId')

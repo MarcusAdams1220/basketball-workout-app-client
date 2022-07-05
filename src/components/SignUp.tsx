@@ -3,10 +3,11 @@ import { Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
 interface SignUpProp {
-  setLoggedIn: (state:boolean) => void
+  setLoggedIn: (state:boolean) => void;
+  loggedIn: any
 }
 
-export default function SignUp({setLoggedIn}:SignUpProp) {
+export default function SignUp({setLoggedIn, loggedIn}:SignUpProp) {
   const [name, setName] = useState(String)
   const [email, setEmail] = useState(String)
   const [password, setPassword] = useState(String)
@@ -48,6 +49,9 @@ export default function SignUp({setLoggedIn}:SignUpProp) {
         } else {
           // Successful sign-up
           setLoggedIn(true)
+          window.localStorage.setItem('isLoggedIn', 'true')
+          window.localStorage.setItem('userId', user.id)
+          window.localStorage.setItem('userName', user.name)
           navigate('/')
         }
       })

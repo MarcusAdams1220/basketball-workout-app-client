@@ -1,8 +1,8 @@
 import { Navbar, Nav, Container } from 'react-bootstrap'
 
 interface NavProps {
-  loggedIn: any;
   setLoggedIn: (state:boolean) => void;
+  loggedIn: any;
 }
 
 export default function Navigation({loggedIn, setLoggedIn}:NavProps) {
