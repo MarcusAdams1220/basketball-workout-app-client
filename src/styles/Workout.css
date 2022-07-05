@@ -2,14 +2,20 @@
   margin-top: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
 }
 
+.workout .drill {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .workout h1 {
   margin-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
   font-weight: 700;
 }
 
@@ -23,6 +29,10 @@
   margin-bottom: 40px;
 }
 
-.drill-video {
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+#save-btn {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  font-size: 25px;
+  padding-right: 30px;
+  padding-left: 30px;
 }

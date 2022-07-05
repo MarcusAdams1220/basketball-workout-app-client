@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Workout from './Workout'
 import { Form } from 'react-bootstrap';
+import { FormControl, InputLabel, Select, MenuItem, NativeSelect } from '@mui/material';
 
 export default function WorkoutBuilder() {
   const [skills, setSkills] = useState(Array)
@@ -57,12 +58,33 @@ export default function WorkoutBuilder() {
               onChange={handleToggle}
               className="skill-checkbox"
             />
+            <hr className='divider' />
             <h2>How Much Time Do You Have?</h2>
-              <Form.Select aria-label="Floating label select example" onChange={handleSelect} className="duration-options" >
-                <option value="15">15 Minutes</option>
-                <option value="30">30 Minutes</option>
-                <option value="60">60 Minutes</option>
-              </Form.Select>
+            <Form.Check 
+              type="radio"
+              name="duration"
+              label="15 Minutes"
+              value='15'
+              onChange={handleSelect}
+              className="duration-select"
+            />
+            <Form.Check 
+              type="radio"
+              name="duration"
+              label="30 Minutes"
+              value='30'
+              onChange={handleSelect}
+              className="duration-select"
+            />
+            <Form.Check 
+              type="radio"
+              name="duration"
+              label="60 Minutes"
+              value='60'
+              onChange={handleSelect}
+              className="duration-select"
+            />
+            <br />
             <button type="submit" className='glow-on-hover'>Create Workout</button>
             <p className='effect-msg'>(Click & Hold For Effect)</p>
           </Form>
@@ -72,7 +94,7 @@ export default function WorkoutBuilder() {
   } else {
     return (
       <>
-        <div className='skills'>
+        <div>
           <Workout
             drills={drills}
             duration={duration}

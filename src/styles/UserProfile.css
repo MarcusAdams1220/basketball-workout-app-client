@@ -1,3 +1,11 @@
 .profile {
   text-align: center;
 }
+
+.profile h1 {
+  font-weight: 700;
+}
+
+.profile h2 {
+  font-size: 20px;
+}

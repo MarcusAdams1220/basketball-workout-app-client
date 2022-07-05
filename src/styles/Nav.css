@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+#basic-navbar-nav {
+  justify-content: right;
+}
+
 #logo {
   width: 250px;
 }

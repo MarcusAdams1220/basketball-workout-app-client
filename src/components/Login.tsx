@@ -57,7 +57,7 @@ export default function Login() {
     return (
       <>
         <Form id="user-form">
-          <h2>Log In</h2>
+          <h1>Log In</h1>
           <p className="error-msg"></p>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email Address</Form.Label>
