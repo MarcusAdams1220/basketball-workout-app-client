@@ -1,4 +1,5 @@
 import { Navbar, Nav, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 interface NavProps {
   setLoggedIn: (state:boolean) => void;
@@ -15,6 +16,8 @@ export default function Navigation({loggedIn, setLoggedIn}:NavProps) {
     setLoggedIn(false)
   }
 
+  console.log(loggedIn)
+
   if (loggedIn) {
     return (
       <>
@@ -26,9 +29,9 @@ export default function Navigation({loggedIn, setLoggedIn}:NavProps) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                <Nav.Link href="/profile" id="nav-link">Profile</Nav.Link>
-                <Nav.Link href="/builder" id="nav-link">Build A Workout</Nav.Link>
-                <Nav.Link href="/" id="nav-link" onClick={logout}>Logout</Nav.Link>
+                <Link to="/profile" id="nav-link">Profile</Link>
+                <Link to="/builder" id="nav-link">Build A Workout</Link>
+                <Link to="/" id="nav-link" onClick={logout}>Logout</Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
