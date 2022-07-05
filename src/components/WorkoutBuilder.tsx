@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Workout from './Workout'
 import { Form } from 'react-bootstrap';
-import { FormControl, InputLabel, Select, MenuItem, NativeSelect } from '@mui/material';
 
 export default function WorkoutBuilder() {
   const [skills, setSkills] = useState(Array)
@@ -67,6 +66,7 @@ export default function WorkoutBuilder() {
               value='15'
               onChange={handleSelect}
               className="duration-select"
+              required
             />
             <Form.Check 
               type="radio"

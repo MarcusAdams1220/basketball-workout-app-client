@@ -1,17 +1,18 @@
 import { Navbar, Nav, Container } from 'react-bootstrap'
 
-export default function Navigation() {
-  const loggedIn = window.localStorage.getItem('isLoggedIn')
-  
+interface NavProps {
+  loggedIn: any;
+  setLoggedIn: (state:boolean) => void;
+}
+
+export default function Navigation({loggedIn, setLoggedIn}:NavProps) {
+
   const logout = () => {
     fetch('/logout', {
       method: "PUT",
       headers: { 'Content-Type': 'application/json'}
     })
-    window.localStorage.removeItem('isLoggedIn')
-    window.localStorage.removeItem('userId')
-    window.localStorage.removeItem('userName')
-    window.localStorage.removeItem('userEmail')
+    setLoggedIn(false)
   }
 
   if (loggedIn) {

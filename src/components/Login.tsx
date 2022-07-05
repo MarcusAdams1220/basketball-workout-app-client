@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import WorkoutBuilder from './WorkoutBuilder'
+import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
+interface LoginProp {
+  setLoggedIn: (state:boolean) => void;
+  loggedIn: Boolean;
+}
+
+export default function Login({setLoggedIn, loggedIn}:LoginProp) {
   const [email, setEmail] = useState(String)
   const [password, setPassword] = useState(String)
-  const loggedIn = window.localStorage.getItem('isLoggedIn')
+  // const loggedIn = window.localStorage.getItem('isLoggedIn')
+  const navigate = useNavigate()
 
   const handleEmailChange = (event:any) => {
     event.preventDefault()
@@ -40,11 +47,13 @@ export default function Login() {
         errorMsg.innerHTML = user.error
       } else {
         // Succesful login
+        setLoggedIn(true)
         window.localStorage.setItem('isLoggedIn', 'true')
         window.localStorage.setItem('userId', user.id)
         window.localStorage.setItem('userName', user.name)
         window.localStorage.setItem('userEmail', user.email)
-        window.location.reload()
+        navigate('/')
+        // window.location.reload()
       }
     })
   }

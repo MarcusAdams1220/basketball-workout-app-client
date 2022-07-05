@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import WorkoutBuilder from './WorkoutBuilder'
 
-export default function SignUp() {
+interface SignUpProp {
+  setLoggedIn: (state:boolean) => void
+}
+
+export default function SignUp({setLoggedIn}:SignUpProp) {
   const [name, setName] = useState(String)
   const [email, setEmail] = useState(String)
   const [password, setPassword] = useState(String)
   const [passwordMatch, setPasswordMatch] = useState(String)
-  const [signedUp, setSignedUp] = useState(false)
   const navigate = useNavigate()
 
   const handleNameChange = (event:any) => {
@@ -38,15 +40,14 @@ export default function SignUp() {
         body: JSON.stringify(data)
       })
       .then(res => res.json())
-      .then(res => { 
-        if (res.error) {
+      .then(user => { 
+        if (user.error) {
           // User already exists
           const errorMsg = document.getElementsByClassName('error-msg')[0]
-          errorMsg.innerHTML = res.error
+          errorMsg.innerHTML = user.error
         } else {
           // Successful sign-up
-          window.localStorage.setItem('isLoggedIn', 'true')
-          setSignedUp(true)
+          setLoggedIn(true)
           navigate('/')
         }
       })

@@ -11,18 +11,19 @@ import './styles/WorkoutBuilder.css'
 import './styles/Workout.css'
 import './styles/UserProfile.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from 'react'
 
 export default function App() {
-  const loggedIn = window.localStorage.getItem('isLoggedIn')
+  const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
   return (
     <div className="App">
       <Router>
-        <Nav />
-        <div className="App">
+        <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+        <div>
           <Routes>
-            <Route path="/" element={loggedIn?<WorkoutBuilder />:<Login />}></Route>
-            <Route path="/sign-up" element={<SignUp />}></Route>
+            <Route path="/" element={loggedIn?<WorkoutBuilder />:<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>}></Route>
+            <Route path="/sign-up" element={<SignUp setLoggedIn={setLoggedIn}/>}></Route>
             <Route path="/profile" element={<UserProfile />}></Route>
           </Routes>
         </div>
