@@ -16,14 +16,12 @@ export default function Navigation({loggedIn, setLoggedIn}:NavProps) {
     setLoggedIn(false)
   }
 
-  console.log(loggedIn)
-
   if (loggedIn) {
     return (
       <>
         <Navbar bg="dark" variant="dark" expand="lg" id="navbar" sticky='top'>
           <Container>
-            <Navbar.Brand href="/">
+            <Navbar.Brand href="/builder">
               <img src="https://i.ibb.co/ftnMXcC/workout-app.png" alt="logo" id="logo"/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
