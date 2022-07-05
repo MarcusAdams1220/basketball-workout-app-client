@@ -27,7 +27,7 @@ export default function Navigation({loggedIn, setLoggedIn}:NavProps) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <Nav.Link href="/profile" id="nav-link">Profile</Nav.Link>
-                <Nav.Link href="/" id="nav-link">Build A Workout</Nav.Link>
+                <Nav.Link href="/builder" id="nav-link">Build A Workout</Nav.Link>
                 <Nav.Link href="/" id="nav-link" onClick={logout}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

@@ -52,15 +52,14 @@ export default function Login({setLoggedIn, loggedIn}:LoginProp) {
         window.localStorage.setItem('userId', user.id)
         window.localStorage.setItem('userName', user.name)
         window.localStorage.setItem('userEmail', user.email)
-        navigate('/')
-        // window.location.reload()
+        navigate('/builder')
       }
     })
   }
 
   if (loggedIn) {
     return (
-      <WorkoutBuilder/>
+      <WorkoutBuilder setLoggedIn={setLoggedIn}/>
     )
   } else {
     return (

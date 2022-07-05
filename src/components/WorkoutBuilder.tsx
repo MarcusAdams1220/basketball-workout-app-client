@@ -2,7 +2,12 @@ import { useState } from 'react'
 import Workout from './Workout'
 import { Form } from 'react-bootstrap';
 
-export default function WorkoutBuilder() {
+interface BuilderProp {
+  setLoggedIn: (state:boolean) => void;
+}
+
+export default function WorkoutBuilder({setLoggedIn}:BuilderProp) {
+  setLoggedIn(true)
   const [skills, setSkills] = useState(Array)
   const [drills, setDrills] = useState(Array)
   const [duration, setDuration] = useState(15)
