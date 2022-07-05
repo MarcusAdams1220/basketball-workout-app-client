@@ -1,13 +1,15 @@
 import ReactPlayer from 'react-player';
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import LoggedInNav from './LoggedInNav';
 
 interface BuilderProps {
   drills: Array<any>;
   duration: number;
+  loggedIn: any;
 }
 
-export default function Workout( { drills, duration }:BuilderProps ) {
+export default function Workout( { drills, duration, loggedIn }:BuilderProps ) {
   const navigate = useNavigate()
 
   const saveWorkout = (event:any) => {
@@ -33,7 +35,7 @@ export default function Workout( { drills, duration }:BuilderProps ) {
             <hr />
           </div>
           )}
-          <Button id='save-btn' onClick={saveWorkout}>Mark As Complete</Button>
+          {loggedIn?<Button id='save-btn' onClick={saveWorkout}>Mark As Complete</Button>:<p></p>}
       </div>
     </>
   )

@@ -104,6 +104,7 @@ export default function WorkoutBuilder({setLoggedIn, loggedIn}:BuilderProp) {
           <Workout
             drills={drills}
             duration={duration}
+            loggedIn = {loggedIn}
           />
         </div>
       </>
